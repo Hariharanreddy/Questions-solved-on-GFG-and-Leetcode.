@@ -8,21 +8,26 @@ public:
         int rowindex = 0;
         int colindex = col-1;
         
+        int element;
+        
         while(rowindex < row && colindex>=0)
         {
             
-            if(matrix[rowindex][colindex] == target)
+            element = matrix[rowindex][colindex];
+            
+            if(element == target)
             {
                 return 1;
             }
-            else if(matrix[rowindex][colindex] > target)
+            else if(element > target)
             {
                 colindex--;
             }
-            else if(matrix[rowindex][colindex] < target)
+            else if(element < target)
             {
                 rowindex++;
             }
+            
             
         }
         
