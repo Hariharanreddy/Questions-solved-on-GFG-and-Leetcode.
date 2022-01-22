@@ -8,12 +8,12 @@ public:
         int rowindex = 0;
         int colindex = col-1;
         
-     
+        int element;
         
         while(rowindex < row && colindex>=0)
         {
             
-             int element = matrix[rowindex][colindex];
+            element = matrix[rowindex][colindex];
             
             if(element == target)
             {
