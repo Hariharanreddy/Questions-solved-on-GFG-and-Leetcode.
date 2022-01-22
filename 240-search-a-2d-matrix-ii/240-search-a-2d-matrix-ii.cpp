@@ -19,11 +19,12 @@ public:
             {
                 return 1;
             }
-            else if(element > target)
+            
+            if(element > target)
             {
                 colindex--;
             }
-            else if(element < target)
+            else
             {
                 rowindex++;
             }
