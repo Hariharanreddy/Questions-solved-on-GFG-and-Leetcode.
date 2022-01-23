@@ -14,8 +14,7 @@ class Solution {
         
         vector<int> vec;
         
-        vector<vector<int>> ans(N, vector<int> (N, 0));
-        
+       
         for(int i = 0; i<N ; i++){
             for(int j = 0; j<N ; j++){
                 vec.push_back(Mat[i][j]);
@@ -28,12 +27,12 @@ class Solution {
         int k = 0;
         for(int i = 0; i<N ; i++){
             for(int j = 0; j<N ; j++){
-                    ans[i][j] = vec[k];
+                    Mat[i][j] = vec[k];
                     k++;
             }
         }
         
-        return ans;
+        return Mat;
         
     }
 };
