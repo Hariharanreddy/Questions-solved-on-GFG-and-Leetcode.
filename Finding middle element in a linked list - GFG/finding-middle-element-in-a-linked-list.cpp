@@ -42,30 +42,33 @@ class Solution{
     
     int getMiddle(Node *head)
     {
-        // Your code here
+        //for empty list
         if(head == NULL)
         {
             return -1;
         }
         
-        //Counting the size of linked list
-        Node *ptr = head;
-        int count = 1;
-        
-        while(ptr -> next != NULL)
+        //for single element
+        if(head -> next == NULL)
         {
-            ptr = ptr -> next;
-            count++;
+            return head -> data;
         }
-    
         
-        //Searching for the middle element
-        for(int i = 0; i < count/2 ; i++)
+        Node *fast = head -> next;
+        Node *slow = head;
+        
+        while(fast != NULL)
+        {
+            fast = fast -> next;
+            if(fast != NULL)
             {
-                head = head -> next;
+                fast = fast -> next;
             }
             
-        return head -> data;
+            slow = slow -> next;
+        }
+        
+        return slow -> data;
         
         
      
