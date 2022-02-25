@@ -53,24 +53,21 @@ class Solution
         if(head == NULL)
             return false;
         
-        map<Node* , bool> visited;
+        Node *slow = head;
+        Node *fast = head -> next;
         
-        Node *temp = head;
-        
-        while(temp != NULL)
+        while(fast != NULL && fast -> next != NULL)
         {
-            //check if its already true or not
-            if(visited[temp] == true)
+            if(slow == fast)
             {
                 return true;
             }
             
-            visited[temp] = true;
-            temp = temp -> next;
+            slow = slow -> next;
+            fast = fast -> next -> next;
         }
         
         return false;
-        
         
     }
 };
