@@ -78,11 +78,14 @@ Node *removeDuplicates(Node *head)
     while(curr != NULL && curr -> next != NULL ) {
         
         if(curr -> data == curr -> next -> data) {
-            Node* next_next = curr ->next -> next;
-            
+         
             Node* nodeToDelete = curr -> next;
+            curr -> next = curr ->next -> next;
+            
+            //memory free
             delete(nodeToDelete);
-            curr -> next = next_next;
+            
+            
         }
         else //not equal
         {
