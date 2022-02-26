@@ -68,52 +68,27 @@ struct Node {
 Node *removeDuplicates(Node *head)
 {
  // your code goes here
- //for single node or empty node
- if(head == NULL || head -> next == NULL)
- {
-     return head;
- }
- 
-
- Node *curr = head;
- 
- while(curr -> next != NULL && curr != NULL)
- {
-     
-     if(curr -> data != curr -> next -> data)
-     {
-         curr = curr -> next;
-     }
-     else
-     {
-         
-         
-         while(curr -> data == curr -> next -> data)
-         {
-            Node *temp = curr -> next;
-             curr -> next = curr -> next -> next;
-             
-             temp -> next = NULL; //nullifying the temp node
-             
-             //memory free
-             delete temp;
-             
-             if(curr -> next == NULL)
-             {
-                 return head;
-             }
-         
-         }
-         curr = curr -> next;
-         
-     }
-     
- }
- 
- return head;
- 
- 
- 
- 
+ 	//empty List
+    if(head == NULL)
+        return NULL;
+    
+    //non empty list
+    Node* curr = head;
+    
+    while(curr != NULL) {
+        
+        if( (curr -> next != NULL) && curr -> data == curr -> next -> data) {
+            Node* next_next = curr ->next -> next;
+            Node* nodeToDelete = curr -> next;
+            delete(nodeToDelete);
+            curr -> next = next_next;
+        }
+        else //not equal
+        {
+            curr = curr -> next;
+        }   
+    }
+    
+    return head; 
  
 }
