@@ -19,66 +19,75 @@ void printArray(int arr[], int size)
 class Solution
 {
     public:
-    void merge(int arr[], int l, int m, int r)
+    void merge(int arr[], int l, int r)
     {
-         //creating the arrays
+         int m = l + (r - l)/2;
+         
          int len1 = m - l + 1;
          int len2 = r - m;
          
          int *first = new int[len1];
          int *second = new int[len2];
          
-         //copy the elements
          int main_array_index = l;
-         for(int i = 0 ; i < len1 ; i++)
+         for(int i = 0 ; i< len1 ; i++)
          {
              first[i] = arr[main_array_index++];
          }
          
          main_array_index = m+1;
-         for(int i = 0 ; i < len2 ; i++)
+         for(int i = 0 ; i< len2 ; i++)
          {
              second[i] = arr[main_array_index++];
          }
          
-         //merging the 2 sorted arrays
          main_array_index = l;
-         int i = 0, j = 0;
+         int i = 0;
+         int j = 0;
          
-         while(i < len1 && j < len2){
-             if(first[i] < second[j])
-                arr[main_array_index++] = first[i++];
+         while(i < len1 && j < len2)
+         {
+             if(first[i] <= second[j])
+             {
+                 arr[main_array_index++] = first[i++]; 
+             }
              else
-                arr[main_array_index++] = second[j++];
+             {
+                 arr[main_array_index++] = second[j++];
+             }
          }
          
-         while(i < len1){
-             arr[main_array_index++] = first[i++];
+         while(i<len1)
+         {
+            arr[main_array_index++] = first[i++]; 
          }
          
-         while(j < len2){
-             arr[main_array_index++] = second[j++];
+         while(j<len2)
+         {
+             arr[main_array_index++] = second[j++]; 
          }
+         
+         delete[] first;
+         delete[] second;
          
     }
     
     void mergeSort(int arr[], int l, int r)
     {
-        //Base Case
         if(l>=r)
-        return;
+        {
+            return;
+        }
         
-        int mid = l + (r-l)/2;
+        int mid = l+(r-l)/2;
         
-        //sorting the left side
+        //left side sort
         mergeSort(arr, l, mid);
         
-        //sorting the right side
+        //right side sort
         mergeSort(arr, mid+1, r);
         
-        //merging
-        merge(arr, l, mid, r);
-        
+        merge(arr, l, r);
         
     }
 };
