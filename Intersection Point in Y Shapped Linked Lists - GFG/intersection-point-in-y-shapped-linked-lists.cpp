@@ -101,6 +101,7 @@ bool detectloop(Node *&head1,Node *&slow,Node *&fast)
 
 int intersectPoint(Node* head1, Node* head2)
 {
+    //edge case
     if(head1 == NULL || head2 == NULL)
     {
         return -1;
@@ -108,20 +109,24 @@ int intersectPoint(Node* head1, Node* head2)
     
     
     Node *ptr1 = head1;
-    Node *ptr2 = head2;
     
+    //reaching the last node of 1st linked list
     while(ptr1 -> next != NULL)
     {
         ptr1 = ptr1 -> next;
     }
     
+    //joining the two linked list to create a loop
     ptr1 -> next = head2;
     
+    
+    //using floyd loop detection algorithm 
     Node *slow = head1;
     Node *fast = head1;
-    
+
     if(detectloop(head1, slow, fast))
     {
+        //finding the starting point of loop which is the intersection
         slow = head1;
         
         while(slow != fast)
@@ -136,10 +141,6 @@ int intersectPoint(Node* head1, Node* head2)
     {
         return -1;
     }
-    
-    
-    
-    
     
 }
 
