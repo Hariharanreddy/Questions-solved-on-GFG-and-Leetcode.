@@ -17,64 +17,66 @@ class Solution
 {
     public:
     //Function to sort an array using quick sort algorithm.
-    int partition (int arr[], int s, int e)
+    int partition(int arr[], int s, int e)
     {
-       //taking pivot as the first element
-       int pivot = arr[s];
-       
-       
-       //counting the number of elements smaller than it
-       int count = 0;
-       for(int i=s+1 ; i<=e ; i++){
-           if(arr[i] <= pivot){
-               count++;
-           }
-       }
-       
-       //swapping it with element having position s+count
-       int pivotindex = s+count;
-       swap(arr[s], arr[pivotindex]);
-       
-       //partioning by placing pointers at first and last position
-       int i = s, j = e;
-       
-       
-       while(i < pivotindex && j > pivotindex){
-           
-           while(arr[i] <= pivot){
-               i++;
-           }
-           
-           while(arr[j] > pivot){
-               j--;
-           }
-           
-           
-           if(i < pivotindex && j > pivotindex){
+        int pivot = arr[s];
+        
+        int count = 0;
+        for(int i=s+1 ; i<=e ; i++)
+        {
+            if(arr[i]<=pivot)
+            {
+                count++;
+            }
+        }
+        
+        
+        swap(arr[s], arr[s+count]);
+        
+        int i = s, j = e;
+        int pivot_index = s + count;
+        
+        while(i < pivot_index && j > pivot_index)
+        {
+            while(arr[i] <= arr[pivot_index])
+            {
+                i++;
+            }
+            
+            while(arr[j] > arr[pivot_index])
+            {
+                j--;
+            }
+            
+            
+           if(i < pivot_index && j > pivot_index){
                swap(arr[i++], arr[j--]);
            }
-           
-       }
-       
-       return pivotindex;
-       
+        }
+        
+        
+        return pivot_index;
+        
+        
     }
+    
+    
+    
     
     void quickSort(int arr[], int s, int e)
     {
-        // base case -> 1 or 0 element in array are sorted.
-        if(s >= e){
+        
+        if(s>=e)
+        {
             return;
         }
         
-        //Partitioning
         int p = partition(arr, s, e);
         
-        //sort the left half
         quickSort(arr, s, p-1);
         
-        //sort the right half
         quickSort(arr, p+1, e);
+      
     }
     
     
