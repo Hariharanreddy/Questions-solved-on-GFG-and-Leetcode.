@@ -13,51 +13,53 @@ using namespace std;
 class Solution
 {
     public:
-    //Function to find list of all words possible by pressing given numbers.
-    void solve(int a[], int N, int index, vector<string> &ans, string output, string mapping[])
+    
+    void solve(int a[], int N, vector<string> &ans, string map[] ,string str, int index)
     {
         //base case
-        if(index >= N)
+        if(index > N-1)
         {
-            ans.push_back(output);
+            ans.push_back(str);
             return;
         }
         
+        //storing the characters of that number
+        int num = a[index];
+        string value = map[num];
         
-        //storing the characters of the number
-        int number = a[index];
-        string value = mapping[number];
-    
-        for(int i=0; i<value.length(); i++)
+        for(int i = 0 ; i < value.length() ; i++)
         {
-            output.push_back(value[i]);
-            solve(a, N, index+1, ans, output, mapping);
-            output.pop_back();                                  //backtracting
+            str.push_back(value[i]);
+            solve(a, N, ans, map, str, index+1);
+            str.pop_back();                           //backtracking
             
         }
-    
+        
     }
-    
-    
+
     
     vector<string> possibleWords(int a[], int N)
     {
-        //Your code here
         vector<string> ans;
         
-        if(N == 0)
-            return ans;
+        // if(N == 1)
+        // {
+        //     return ans
+        // }
         
-        string output = "";
+        
+        string map[10] = {"", "", "abc","def", "ghi", "jkl", "mno","pqrs", "tuv", "wxyz"};
+        
+        
+        
+        string str = "";
         
         int index = 0;
         
-        string mapping[10] = {"", "", "abc", "def", "ghi", "jkl", "mno", "pqrs", "tuv", "wxyz"};
-        
-        solve(a, N, index, ans, output, mapping);
+        solve(a, N, ans, map, str, index);
         
         return ans;
-        
+
     }
 };
 
