@@ -157,10 +157,9 @@ class Solution
         reverse(second);
         
         //step 2 add the two nodes
-        Node *ans = add(first, second);
+        return add(first, second);
         
-        //step 4 return
-        return ans;
+        
         
         
     }
