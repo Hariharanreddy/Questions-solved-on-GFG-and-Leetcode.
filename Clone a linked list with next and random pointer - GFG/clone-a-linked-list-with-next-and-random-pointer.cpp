@@ -52,30 +52,58 @@ class Solution
             ptr = ptr -> next;
         }
         
-       
-        //Mapping clone list and original list
-        Node *originalList = head;
-        Node *cloneList = cloneHead;
-        unordered_map<Node*, Node*> mapping;
+        //change links in between clonelist and linkedlist
+        Node *prev1 = head;
+        Node *prev2 = cloneHead;
         
-        while(originalList != NULL)
+        
+        
+        while(prev1 != NULL)
         {
-            mapping[originalList] = cloneList;
-            originalList = originalList -> next;
-            cloneList = cloneList -> next;
-        }
-        
-        //Set random pointer of clone list
-        cloneList = cloneHead;
-        originalList = head;
-        
-        while(originalList != NULL)
-        {
-            cloneList -> arb = mapping[originalList -> arb];
-            cloneList = cloneList -> next;
-            originalList = originalList -> next;
+            Node *temp = prev1 -> next;
+            prev1 -> next = prev2;
+            prev1 = temp;
+            
+            temp = prev2 -> next;
+            prev2 -> next = prev1;
+            prev2 = temp;
+            
         }   
         
+        
+        
+        //Set random pointer of clone list
+        prev1 = head;
+        
+        while(prev1 != NULL)
+        {
+            if(prev1 -> arb != NULL)  //else prev1 -> arb -> next will be seg fault
+            {
+                prev1 -> next -> arb = prev1 -> arb -> next;
+            }
+            
+            prev1 = prev1 -> next -> next;
+        }
+        
+        //revert changes done in step 2
+        prev1 = head;
+        prev2 = cloneHead;
+        
+        while(prev1 != NULL && prev2 != NULL)
+        {
+            Node *temp = prev2 -> next;
+            prev1 -> next = temp;
+            prev1 = temp;
+            
+            if(temp != NULL)
+            {
+            temp = temp -> next;
+            }
+            prev2 -> next = temp;
+            prev2 = temp;
+        }
+        
+
         return cloneHead;
         
  
