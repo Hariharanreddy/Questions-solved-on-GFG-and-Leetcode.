@@ -84,20 +84,7 @@ int main()
 
 void splitList(Node *head, Node **head1_ref, Node **head2_ref)
 {
-    //EMPTY LIST
-    if(head == NULL)
-    {
-        return;
-    }
-    
-    //if single Node
-    // if(head -> next == head)
-    // {
-        
-    //     *head1_ref = head;
-    //     *head2_ref = head;
-    //     return;
-    // }
+
     
     Node *slow = head;
     Node *fast = head -> next;
