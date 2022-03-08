@@ -52,13 +52,13 @@ you are required to complete the below method */
 void sortedInsert(stack<int> &s, int element)
 {
     //when its an empty list or s.top() < num
-    if(s.empty() || (!s.empty() && s.top() < element))
+    if(s.empty() || s.top() < element)
     {
         s.push(element);
         return;
     }
     
-    //storing and popping
+    //Storing and popping
     int num = s.top();
     s.pop();
     
@@ -71,12 +71,7 @@ void sortedInsert(stack<int> &s, int element)
 void SortedStack :: sort()
 {
    //base case
-   if(s.empty())
-   {
-       return;
-   }
-   
-   if(s.size() == 1)
+   if(s.empty() || s.size() == 1)
    {
        return;
    }
@@ -85,8 +80,7 @@ void SortedStack :: sort()
    int num = s.top();
    s.pop();
    
-   sort();
+   sort();                  //sort karke do
    
-   sortedInsert(s, num);
-   
+   sortedInsert(s, num);    //num ko proper jagah pe insert kardo
 }
