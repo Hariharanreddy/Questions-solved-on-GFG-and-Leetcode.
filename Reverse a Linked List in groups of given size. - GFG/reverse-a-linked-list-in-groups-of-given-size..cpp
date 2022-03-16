@@ -75,10 +75,10 @@ class Solution
         
         
         //step2 : recursion will take care
-        if(forward != NULL)
-        {
+        // if(forward != NULL)
+        
             head -> next = reverse(forward, k);
-        }
+        
         
         //return the head
         return prev;
