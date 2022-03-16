@@ -21,92 +21,85 @@ struct Node {
 class Solution
 {
     public:
+    
     void insertAttail(Node* &head, Node* &tail, int data)
     {
-        Node *NewNode = new Node(data);
+        Node *temp = new Node(data);
+        
         //if empty list
         if(head == NULL)
         {
-            head = NewNode;
-            tail = NewNode;
+            head = temp;
+            tail = temp;
         }
         else
         {
-            tail -> next = NewNode;
-            tail = NewNode;
+            tail -> next = temp;
+            tail = temp;
         }
+        
     }
-    
     
     
     Node *copyList(Node *head)
     {
-        //Create a clone list using next pointer only
+        Node *originalhead = head;
+        Node *temp = head;
+        
         Node *cloneHead = NULL;
         Node *cloneTail = NULL;
-        Node *ptr = head;
         
-        while(ptr != NULL)
+        //Cloning the original list
+        while(temp != NULL)
         {
-            insertAttail(cloneHead, cloneTail, ptr->data);
-            ptr = ptr -> next;
+            insertAttail(cloneHead, cloneTail, temp->data);
+            temp = temp -> next;
         }
         
-        //change links in between clonelist and linkedlist
-        Node *prev1 = head;
-        Node *prev2 = cloneHead;
-        
-        
-        
-        while(prev1 != NULL)
+        //Creating links in between original list and clone list
+        temp = head;
+        Node *ansHead = cloneHead;
+        while(temp != NULL)
         {
-            Node *temp = prev1 -> next;
-            prev1 -> next = prev2;
-            prev1 = temp;
+            head = head -> next;
+            temp -> next = cloneHead;
+            temp = cloneHead;
             
-            temp = prev2 -> next;
-            prev2 -> next = prev1;
-            prev2 = temp;
-            
-        }   
+            cloneHead = cloneHead -> next;
+            temp -> next = head;
+            temp = head;
+        }
         
+        //Cloning the random pointers
+        temp = originalhead;
         
-        
-        //Set random pointer of clone list
-        prev1 = head;
-        
-        while(prev1 != NULL)
+        while(temp != NULL)
         {
-            if(prev1 -> arb != NULL)  //else prev1 -> arb -> next will be seg fault
+            if(temp -> arb != NULL)
             {
-                prev1 -> next -> arb = prev1 -> arb -> next;
+                temp -> next -> arb = temp -> arb -> next;
             }
             
-            prev1 = prev1 -> next -> next;
+            temp = temp -> next -> next;
         }
         
-        //revert changes done in step 2
-        prev1 = head;
-        prev2 = cloneHead;
-        
-        while(prev1 != NULL && prev2 != NULL)
+        //De-linking the previous links in step 2
+        temp = originalhead;
+        Node *temp2 = NULL;
+        while(temp != NULL)
         {
-            Node *temp = prev2 -> next;
-            prev1 -> next = temp;
-            prev1 = temp;
+            temp2 = temp -> next;
+            temp -> next = temp2 -> next;
+            temp = temp2 -> next;
             
             if(temp != NULL)
             {
-            temp = temp -> next;
+                temp2 -> next = temp -> next;
             }
-            prev2 -> next = temp;
-            prev2 = temp;
         }
         
+        return ansHead;
 
-        return cloneHead;
-        
- 
     }
 
 };
