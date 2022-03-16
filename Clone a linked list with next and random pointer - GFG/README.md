@@ -1,5 +1,5 @@
 # Clone a linked list with next and random pointer
-## Hard 
+##  Hard 
 <div class="problem-statement">
                 <p></p><p><span style="font-size:18px">You are given a special&nbsp;linked list&nbsp;with&nbsp;<strong>N </strong>nodes where each node has a&nbsp;next pointer pointing to its&nbsp;next node. You are also given&nbsp;<strong>M</strong>&nbsp;random pointers, where you will be given <strong>M </strong>number of pairs denoting two nodes <strong>a</strong> and <strong>b</strong>&nbsp;&nbsp;<strong>i.e.&nbsp;</strong></span><strong><span style="font-size:18px">a-&gt;arb = b.</span></strong></p>
 
