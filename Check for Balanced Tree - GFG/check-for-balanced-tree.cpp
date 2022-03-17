@@ -104,44 +104,76 @@ struct Node
 class Solution{
     public:
     //Function to check whether a binary tree is balanced or not.
-    int height(Node *root)
+    // int height(Node *root)
+    // {
+    //     //base case
+    //     if(root == NULL)
+    //     {
+    //         return 0;
+    //     }
+        
+    //     int left = height(root -> left);
+    //     int right = height(root -> right);
+        
+    //     int ans = max(left, right) + 1;
+    //     return ans;
+    // }
+    pair<int, int> isbalancedfast(Node *root)
     {
-        //base case
+        //Base Case
         if(root == NULL)
         {
-            return 0;
+            pair<bool, int> p = make_pair(true, 0);
+            return p;
         }
         
-        int left = height(root -> left);
-        int right = height(root -> right);
+        pair<bool, int> left = isbalancedfast(root -> left);
+        pair<bool, int> right = isbalancedfast(root -> right);
         
-        int ans = max(left, right) + 1;
-        return ans;
-    }
-    
-    
-    bool isBalanced(Node *root)
-    {
-        //base case
-        if(root == NULL)
-        {
-            return true;
-        }
+        bool left_ans = left.first;
+        bool right_ans = right.first;
+        bool height_balance = abs(left.second - right.second) <= 1;
         
-        //Recursive calls
-        bool left_ans = isBalanced(root -> left);
-        bool right_ans = isBalanced(root -> right);
-        
-        bool height_balance = abs(height(root->left) - height(root->right)) <= 1;
+        pair<bool, int> ans;
+        ans.second = max(left.second, right.second) + 1;
         
         if(left_ans && right_ans && height_balance)
         {
-            return true;
+            ans.first = true;
+            return ans;
         }
         else
         {
-            return false;
+            ans.first = false;
+            return ans;
         }
+        
+    }
+    
+    bool isBalanced(Node *root)
+    {
+        
+        return isbalancedfast(root).first;
+        //base case
+        // if(root == NULL)
+        // {
+        //     return true;
+        // }
+        
+        // //Recursive calls
+        // bool left_ans = isBalanced(root -> left);
+        // bool right_ans = isBalanced(root -> right);
+        
+        // bool height_balance = abs(height(root->left) - height(root->right)) <= 1;
+        
+        // if(left_ans && right_ans && height_balance)
+        // {
+        //     return true;
+        // }
+        // else
+        // {
+        //     return false;
+        // }
         
     }
 };
