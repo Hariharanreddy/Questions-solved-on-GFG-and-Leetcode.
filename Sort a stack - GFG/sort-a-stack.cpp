@@ -62,16 +62,16 @@ void sortedInsert(stack<int> &s, int element)
     int num = s.top();
     s.pop();
     
-    sortedInsert(s, element);
+    sortedInsert(s, element);       //sorted insert karke do
     
-    s.push(num);
+    s.push(num);                    //insert karne ke baad push kardunga stored num ko
 }
 
 
 void SortedStack :: sort()
 {
    //base case
-   if(s.empty() || s.size() == 1)
+   if(s.size() == 1)
    {
        return;
    }
