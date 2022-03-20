@@ -119,8 +119,9 @@ struct Node
     int data;
     Node* left, * right;
 }; */
-void diagonalPrintUtil(Node* root, int d,
-                map<int, vector<int>> &diagonalPrint)
+
+
+void PreorderTraverse(Node* root, int d, map<int, vector<int>> &mpp)
 {
     // Base case
     if (!root)
@@ -128,27 +129,27 @@ void diagonalPrintUtil(Node* root, int d,
  
     // Store all nodes of same
     // line together as a vector
-    diagonalPrint[d].push_back(root->data);
+    mpp[d].push_back(root->data);
  
     // Increase the vertical
     // distance if left child
-    diagonalPrintUtil(root->left,
-                      d + 1, diagonalPrint);
+    PreorderTraverse(root->left,
+                      d + 1, mpp);
  
     // Vertical distance remains
     // same for right child
-    diagonalPrintUtil(root->right,
-                         d, diagonalPrint);
+    PreorderTraverse(root->right,
+                         d, mpp);
 }
 
 vector<int> diagonal(Node *root)
 {
    vector<int> ans;
     
-   map<int, vector<int> > diagonalPrint;
-   diagonalPrintUtil(root, 0, diagonalPrint);
+   map<int, vector<int> > mpp;
+   PreorderTraverse(root, 0, mpp);
    
-   for(auto a: diagonalPrint)
+   for(auto a: mpp)
    {
        for(auto b : a.second)
        {
