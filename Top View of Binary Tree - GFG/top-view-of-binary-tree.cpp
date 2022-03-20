@@ -108,40 +108,36 @@ class Solution
     {
         vector<int> ans;
         
-        map<int, map<int, vector<int>>> nodes;
-        queue<pair<Node*, pair<int, int>>> q;
+        map<int, int> nodes;
+        queue<pair<Node*, int>> q;
         
-        q.push(make_pair(root, make_pair(0, 0)));
+        q.push(make_pair(root, 0));
         
         while(!q.empty())
         {
-            pair<Node*, pair<int, int>> temp = q.front();
+            pair<Node*, int> temp = q.front();
             q.pop();
             
-            int hd = temp.second.first;
-            int lvl = temp.second.second;
+            int hd = temp.second;
             
-            nodes[hd][lvl].push_back(temp.first -> data);
+            //If it is not mapped then map it
+            if(nodes.find(hd) == nodes.end())
+            {
+                nodes[hd] = temp.first -> data;
+            }
             
             if(temp.first -> left)
-                q.push(make_pair(temp.first -> left, make_pair(hd-1, lvl+1)));
+                q.push(make_pair(temp.first -> left, hd-1));
             
             if(temp.first -> right)
-                q.push(make_pair(temp.first -> right, make_pair(hd+1, lvl+1)));
+                q.push(make_pair(temp.first -> right, hd+1));
         }
         
         for(auto a : nodes)
         {
-            for(auto b : a.second)
-            {
-                for(auto c: b.second)
-                {
-                    ans.push_back(c);
-                    break;
-                }
-                break;
-            }
+            ans.push_back(a.second);
         }
+        
         
         return ans;
         
