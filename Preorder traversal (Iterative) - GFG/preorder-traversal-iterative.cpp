@@ -102,22 +102,22 @@ class Solution{
         vector<int> ans;
         
         //we will be using stacks for pre, post and in-order
-        stack<Node *> st;
-        st.push(root);
+        deque<Node *> st;
+        st.push_front(root);
         
         while(!st.empty())
         {
-            Node *temp = st.top();
-            st.pop();
+            Node *temp = st.front();
+            st.pop_front();
             
             ans.push_back(temp -> data);
             
             //first go the right and then go to left. -> because stack is LIFO
             if(temp -> right){
-                st.push(temp->right);
+                st.push_front(temp->right);
             }
             if(temp -> left){
-                st.push(temp->left);
+                st.push_front(temp->left);
             }
         }
         
