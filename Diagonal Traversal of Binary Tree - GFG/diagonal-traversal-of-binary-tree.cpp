@@ -124,7 +124,7 @@ struct Node
 void PreorderTraverse(Node* root, int d, map<int, vector<int>> &mpp)
 {
     // Base case
-    if (!root)
+    if (root == NULL)
         return;
  
     // Store all nodes of same
