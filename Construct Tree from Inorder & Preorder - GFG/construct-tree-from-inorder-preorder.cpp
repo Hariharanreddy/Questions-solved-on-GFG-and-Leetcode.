@@ -41,21 +41,17 @@ struct Node
 */
 class Solution{
     public:
-    int findpos(int in[], int PreEndindex, int element)
+    void createMap(int in[], int n, map<int, int> &mpp)
     {
-        for(int i = 0 ; i<PreEndindex ; i++)
+        for(int i = 0; i < n ; i++)
         {
-            if(in[i] == element)
-            {
-                return i;
-            }
+            mpp[in[i]] = i;
         }
-        
-        return -1;
     }
     
     
-    Node *solve(int in[],int pre[], int &PreStartindex, int PreEndindex, int InStartIndex, int InEndIndex)
+    Node *solve(int in[],int pre[], int &PreStartindex, int PreEndindex,
+                int InStartIndex, int InEndIndex, map<int, int> &mpp)
     {
         //base case
         if(PreStartindex == PreEndindex || InStartIndex > InEndIndex)
@@ -68,11 +64,11 @@ class Solution{
         Node *root = new Node(element);
         
         //find position of that element in Inorder array 
-        int pos = findpos(in, PreEndindex, element);
+        int pos = mpp[element];
         
         //recursive call to left -> similar to partitioning
-        root -> left = solve(in, pre, PreStartindex, PreEndindex, InStartIndex, pos-1);  //do the same for left partition of inorder
-        root -> right = solve(in, pre, PreStartindex, PreEndindex, pos+1, InEndIndex);   //do the same for right partition of inorder
+        root -> left = solve(in, pre, PreStartindex, PreEndindex, InStartIndex, pos-1, mpp);  //do the same for left partition of inorder
+        root -> right = solve(in, pre, PreStartindex, PreEndindex, pos+1, InEndIndex, mpp);   //do the same for right partition of inorder
         
         //return 
         return root;
@@ -83,7 +79,10 @@ class Solution{
     {
         int PreStartindex = 0;
         
-        Node *ans = solve(in, pre, PreStartindex, n, 0, n-1);
+        map<int, int> mpp;          //mapping node to index of inorder
+        createMap(in , n, mpp);
+        
+        Node *ans = solve(in, pre, PreStartindex, n, 0, n-1, mpp);
         
         return ans;
         
