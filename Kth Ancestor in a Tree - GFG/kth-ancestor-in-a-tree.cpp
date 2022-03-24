@@ -136,6 +136,9 @@ void solve(Node *root, int k, int node, int &Kthancestor, vector<int> path)
     solve(root -> left, k, node, Kthancestor, path);
     solve(root -> right, k, node, Kthancestor, path);
     
+    path.pop_back();
+    
+    
 }
 
 
