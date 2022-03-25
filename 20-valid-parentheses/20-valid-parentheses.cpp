@@ -3,7 +3,11 @@ public:
     bool isValid(string st) {
         
         stack<char> s;
+        
         int size = st.length();
+        
+        if(size == 1)
+            return false;
         
         for(int i = 0 ; i<size ; i++)
         {
