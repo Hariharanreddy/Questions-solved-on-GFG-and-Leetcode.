@@ -9,74 +9,79 @@ using namespace std;
 
 class Solution{
   public:
-    vector<int> prevSmallerElement(int arr[], int n)
+    
+       
+    vector<int> NextSmallerElement(vector<int> vec, int size)
     {
-        stack<int> s;            //for indexes
-        s.push(-1);             
+        vector<int> ans(size);
         
-        vector<int> ans(n);
+        stack<int> s;
+        s.push(-1);
         
-        for(int i=0;i<n;i++)
+        for(int i = size-1 ; i >= 0 ; i--)
         {
-            int curr = arr[i];
             
-            while(s.top() != -1 && arr[s.top()] >= curr)      //arr[s.top()] is the element on stack
+            while(s.top() != -1 && vec[s.top()] >= vec[i])
             {
                 s.pop();
             }
             
-            ans[i] = s.top();      //store the prevsmallerelement index
-            s.push(i);             //pushing the index
-                
+            ans[i] = s.top();
+        
+            s.push(i);
         }
         
         return ans;
-        
         
     }
     
-    vector<int> nextSmallerElement(int arr[], int n)
+    vector<int> PrevSmallerElement(vector<int> vec, int size)
     {
+        vector<int> ans(size);
+        
         stack<int> s;
-        s.push(-1);                 //for indexes
+        s.push(-1);
         
-        vector<int> ans(n);
-        
-        for(int i=n-1; i>=0 ;i--)
+        for(int i = 0 ; i < size ; i++)
         {
-            int curr = arr[i];
             
-            while(s.top() != -1 && arr[s.top()] >= curr)      //arr[s.top()] is the element on stack
+            while(s.top() != -1 && vec[s.top()] >= vec[i])
             {
                 s.pop();
             }
             
-            ans[i] = s.top();      //store the nextsmallerelement index
-            s.push(i);             //pushing the index
+            ans[i] = s.top();
             
+            s.push(i);
         }
         
         return ans;
-
-    }
-  
-  
-    int getMaxArea(int arr[], int n)
-    {
-        vector<int> next;
-        next = nextSmallerElement(arr, n);
         
-        vector<int> prev;
-        prev = prevSmallerElement(arr, n);
+    }
+    
+    
+    int Largesthistogram(vector<int> vec, int c)
+    {
+        //find the indexes of next smaller element
+        vector<int> next(c, 0);
+        vector<int> prev(c, 0);
+        
+        //returns the vector having indexes of next smaller elements
+        next = NextSmallerElement(vec, c);
+        
+        //for prev smaller element
+        prev = PrevSmallerElement(vec, c);
+        
         
         int area = INT_MIN;
-        for(int i=0;i<n;i++)
+        //traversing the column and calculating max area
+        for(int i = 0 ; i < c ; i++)
         {
-            int l = arr[i];
+            int l = vec[i];
             
             if(next[i] == -1)
             {
-                next[i] = n;
+                next[i] = c;
             }
             
             int b = next[i] - prev[i] - 1;
@@ -85,36 +90,38 @@ class Solution{
         }
         
         return area;
+        
     }
-  
+    
+
   
   
     int maxArea(int M[MAX][MAX], int n, int m) {
         
+        vector<int> vec(m, 0);
         int area = INT_MIN;
         
-        int arr[m] = {0};
-        
-        for(int i = 0; i< n ; i++)
+        for(int i = 0 ; i < n ; i++)
         {
-            for(int j = 0 ; j<m ; j++)
+            for(int j = 0 ; j < m ; j++)
             {
-                //if base row element is 0, histogram can't be made so take that bar of histogram as 0.
                 if(M[i][j] == 0)
                 {
-                    arr[j] = 0;
+                    vec[j] = 0;
                 }
                 else
                 {
-                arr[j] = arr[j] + M[i][j];
+                    vec[j] += M[i][j];
                 }
             }
             
-            area = max(area, getMaxArea(arr, m));
+            int new_area = Largesthistogram(vec, m);
+            
+            area = max(new_area, area);
         }
         
         return area;
- 
+       
     }
 };
 
