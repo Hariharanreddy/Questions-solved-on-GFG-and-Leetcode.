@@ -103,50 +103,40 @@ class Solution
     //Function to find the vertical order traversal of Binary Tree.
     vector<int> verticalOrder(Node *root)
     {
-        vector<int> ans; //final answer to be stored
-
-        //for mapping level , horizontal distance and the elements associated with them
-        map<int, map<int, vector<int>>> nodes;
-        
-        //Doing level order traversal with need two things -> horizontal distance and level
-        queue<pair<Node*, pair<int, int >>> q;
-        
-        //for root node -> level is 0 and HD is 0
-        q.push(make_pair(root, make_pair(0, 0)));
-        
-        while(!q.empty())
-        {
-            //Store and pop it
-            pair<Node*, pair<int, int >> temp = q.front();
-            q.pop();
+       vector<int> ans;
+       
+       //mapping the HD and node (level will be taken care by level order traversal)
+       map<int, vector<int>> nodes;
+       
+       queue<pair<Node*, int>> q;
+       q.push(make_pair(root, 0));
+       
+       while(!q.empty())
+       {
+           pair<Node*, int> temp = q.front();
+           q.pop();
+           
+           int hd = temp.second;
+           
+           //mapping
+           nodes[hd].push_back(temp.first -> data);
+           
+           if(temp.first -> left)
+            q.push(make_pair(temp.first -> left, hd-1));
             
-            //Store level and hd 
-            int hd = temp.second.first;
-            int level = temp.second.second;
-            
-            //map it in node
-            nodes[hd][level].push_back(temp.first -> data);
-            
-            if(temp.first -> left)
-                q.push(make_pair(temp.first -> left, make_pair(hd-1, level+1)));
-                
-            if(temp.first -> right)
-                q.push(make_pair(temp.first -> right, make_pair(hd+1, level+1)));    
-            
-        }
-        
-        for(auto a : nodes)
-        {
-            for(auto b : a.second)
-            {
-                for(auto c : b.second)
-                {
-                    ans.push_back(c);
-                }
-            }
-        }
-        
-        return ans;
+           if(temp.first -> right)
+            q.push(make_pair(temp.first -> right, hd+1));
+       }
+       
+       for(auto x : nodes)
+       {
+           for(auto y : x.second)
+           {
+               ans.push_back(y);
+           }
+       }
+       
+       return ans;
     }
 };
 
