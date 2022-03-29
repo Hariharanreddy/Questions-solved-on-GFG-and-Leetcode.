@@ -118,62 +118,39 @@ class Solution{
     //     int ans = max(left, right) + 1;
     //     return ans;
     // }
-    pair<int, int> isbalancedfast(Node *root)
+    
+    int height(Node *root)
     {
-        //Base Case
         if(root == NULL)
-        {
-            pair<bool, int> p = make_pair(true, 0);
-            return p;
-        }
+            return 0;
         
-        pair<bool, int> left = isbalancedfast(root -> left);
-        pair<bool, int> right = isbalancedfast(root -> right);
+        int left = height(root -> left);
+        int right = height(root -> right);
         
-        bool left_ans = left.first;
-        bool right_ans = right.first;
-        bool height_balance = abs(left.second - right.second) <= 1;
-        
-        pair<bool, int> ans;
-        ans.second = max(left.second, right.second) + 1;
-        
-        if(left_ans && right_ans && height_balance)
-        {
-            ans.first = true;
-            return ans;
-        }
-        else
-        {
-            ans.first = false;
-            return ans;
-        }
-        
+        int ans = max(left, right) + 1;
+        return ans;
     }
+    
     
     bool isBalanced(Node *root)
     {
+        if(root == NULL)
+            return true;
         
-        return isbalancedfast(root).first;
-        //base case
-        // if(root == NULL)
-        // {
-        //     return true;
-        // }
+            
+        bool left = isBalanced(root -> left);
+        bool right = isBalanced(root -> right);
         
-        // //Recursive calls
-        // bool left_ans = isBalanced(root -> left);
-        // bool right_ans = isBalanced(root -> right);
+        bool heigt_balanced = abs(height(root -> left) - height(root -> right)) <= 1;
         
-        // bool height_balance = abs(height(root->left) - height(root->right)) <= 1;
+        if(left && right && heigt_balanced)
+        {
+            return true;
+        }
+        else
+            return false;
         
-        // if(left_ans && right_ans && height_balance)
-        // {
-        //     return true;
-        // }
-        // else
-        // {
-        //     return false;
-        // }
+        
         
     }
 };
