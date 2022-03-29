@@ -107,7 +107,6 @@ class Solution {
         if(i == k)
         {
             ans = root->data;
-            return;
         }
         
         solve(root -> right, k, i, ans);
