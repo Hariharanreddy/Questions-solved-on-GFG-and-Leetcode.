@@ -97,54 +97,43 @@ class Solution
     
     public:
     
-    int subtree_sum(Node *root)
+    pair<bool, int> sumtreefast(Node *root)
     {
-        //base case
         if(root == NULL)
         {
-            return 0;
+            pair<bool, int> p = make_pair(true, 0);
+            return p;
         }
         
+        if(root -> left == NULL && root -> right == NULL)
+        {
+           pair<bool, int> p = make_pair(true, root -> data);
+           return p; 
+        }
         
+        pair<bool, int> left = sumtreefast(root -> left);
+        pair<bool, int> right = sumtreefast(root -> right);    
         
-        int left_sum = subtree_sum(root -> left);
-        int right_sum = subtree_sum(root -> right);
+        pair<bool, int> sum;
+        bool check_sumtree = (left.second + right.second) == root -> data;
+        sum.second = left.second + right.second + root -> data;
         
-        int ans = 0;
-        if(left_sum == 0 && right_sum == 0)
-            ans = root -> data;
+        if(left.first && right.first && check_sumtree)
+        {
+            sum.first = true;
+        }
         else
-            ans = left_sum + right_sum + root -> data;
+        {
+            sum.first = false;
+        }
         
-        return ans;
+        return sum;
+        
     }
-    
     
     bool isSumTree(Node* root)
     {
-         //base case
-         if(root == NULL)
-         {
-             return true;
-         }
-         
-         if(root -> left == NULL && root -> right == NULL)
-         {
-             return true;
-         }
-         
-         
-         
-         bool left_ans = isSumTree(root -> left);
-         bool right_ans = isSumTree(root -> right);
-         
-         bool check_sum = subtree_sum(root -> left)+subtree_sum(root -> right) == root -> data;
-         
-         if(left_ans && right_ans && check_sum)
-             return true;
-         else
-            return false;
-            
+        return sumtreefast(root).first;
     }
 };
 
