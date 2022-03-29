@@ -120,42 +120,37 @@ struct Node
     Node* left, * right;
 }; */
 
-
-void PreorderTraverse(Node* root, int d, map<int, vector<int>> &mpp)
+void preOrder_diagonaltraversal(Node *root, map<int, vector<int>> &nodes, int level)
 {
-    // Base case
-    if (root == NULL)
+    //base case
+    if(root == NULL)
         return;
- 
-    // Store all nodes of same
-    // line together as a vector
-    mpp[d].push_back(root->data);
- 
-    // Increase the vertical
-    // distance if left child
-    PreorderTraverse(root->left,
-                      d + 1, mpp);
- 
-    // Vertical distance remains
-    // same for right child
-    PreorderTraverse(root->right,
-                         d, mpp);
+    
+    nodes[level].push_back(root -> data);
+    
+    preOrder_diagonaltraversal(root -> left , nodes, level+1);
+    preOrder_diagonaltraversal(root -> right , nodes, level);
+    
 }
+
+
 
 vector<int> diagonal(Node *root)
 {
    vector<int> ans;
-    
-   map<int, vector<int> > mpp;
-   PreorderTraverse(root, 0, mpp);
+   map<int, vector<int>> nodes;
+   int level = 0;
    
-   for(auto a: mpp)
+   preOrder_diagonaltraversal(root, nodes, level);
+   
+   for(auto x : nodes)
    {
-       for(auto b : a.second)
+       for(auto y : x.second)
        {
-           ans.push_back(b);
+           ans.push_back(y);
        }
    }
    
    return ans;
+   
 }
