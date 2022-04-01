@@ -94,32 +94,89 @@ struct Node {
 class Solution {
   public:
     // Return the Kth smallest element in the given BST
-    void solve(Node *root, int k, int &i, int &ans)
+    // void solve(Node *root, int k, int &i, int &ans)
+    // {
+    //     //base case
+    //     if(root == NULL)
+    //         return;
+        
+    //     solve(root -> left, k, i, ans);
+        
+    //     //processing
+    //     i = i + 1;
+    //     if(i == k)
+    //     {
+    //         ans = root->data;
+    //     }
+        
+    //     solve(root -> right, k, i, ans);
+    // }
+    
+    //T.C -> O(N), S.C -> O(1)
+    void morristraversal(Node *root, int k, int &i, int &ans)
     {
-        //base case
-        if(root == NULL)
-            return;
+        Node *curr = root;
         
-        solve(root -> left, k, i, ans);
-        
-        //processing
-        i = i + 1;
-        if(i == k)
+        while(curr != NULL)
         {
-            ans = root->data;
+            if(curr -> left)
+                {
+                    Node *pred = curr -> left;
+                    while(pred -> right != NULL && pred -> right != curr)
+                    {
+                        pred = pred -> right;
+                    }
+                    
+                    //create link
+                    if(pred -> right == NULL)
+                    {
+                        pred -> right = curr;
+                        curr = curr -> left;
+                    }
+                    
+                    //break link
+                    if(pred -> right == curr)
+                    {
+                        pred -> right = NULL;
+                        
+                        i = i+1;
+                        if(i == k)
+                        {
+                            ans = curr -> data;
+                        }
+                        
+                        curr = curr -> right;
+                    }
+                    
+                }
+            else
+                {
+                    i = i+1;
+                    if(i == k)
+                    {
+                        ans = curr -> data;
+                    }
+                    
+                    curr = curr -> right;
+                }
         }
         
-        solve(root -> right, k, i, ans);
+        
     }
-    
     
     int KthSmallestElement(Node *root, int k) {
         
-        int ans = -1;
-        int i = 0;
-        solve(root, k, i, ans);
+        // int ans = -1;
+        // int i = 0;
+        // solve(root, k, i, ans);
         
-        return ans;
+        // return ans;
+         int ans = -1;
+         int i = 0;
+         morristraversal(root, k, i, ans);
+         
+         return ans;
+        
     }
 };
 
