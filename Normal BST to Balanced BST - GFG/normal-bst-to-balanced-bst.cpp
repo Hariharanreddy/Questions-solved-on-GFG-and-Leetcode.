@@ -153,6 +153,7 @@ Node *CreateBST(int s, int e, vector<int> &vec)
 {
     if(s>e)
         return NULL;
+    
         
     int mid = (s+e)/2;
     Node *newRoot = new Node(vec[mid]);
