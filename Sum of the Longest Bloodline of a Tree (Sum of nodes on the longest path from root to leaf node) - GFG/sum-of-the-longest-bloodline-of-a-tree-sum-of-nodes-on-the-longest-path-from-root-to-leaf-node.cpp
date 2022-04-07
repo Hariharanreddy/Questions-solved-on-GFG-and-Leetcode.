@@ -122,13 +122,9 @@ public:
         //base case
         if(root == NULL)
         {
-            if(len > Maxlen)
+            if(len >= Maxlen)
             {
                 Maxlen = len;
-                Maxsum = max(sum, Maxsum);
-            }
-            else if(len == Maxlen)
-            {
                 Maxsum = max(sum, Maxsum);
             }
             
