@@ -92,25 +92,7 @@ int main() {
 }// } Driver Code Ends
 
 
-// Function to find the minimum element in the given BST.
-void solve(Node *root, int &mini)
-{
-    //base case
-    if(root == NULL)
-    {
-        return;
-    }
-    
-    solve(root -> left, mini);
-    
-    if(root -> data < mini)
-    {
-        mini = root -> data;
-    }
-    
-    solve(root -> right, mini);
-    
-}
+// Function to find the minimum element in the given BST
 
 int minValue(Node* root) {
     
@@ -119,10 +101,13 @@ int minValue(Node* root) {
         return -1;
     }
     
-    int mini = INT_MAX;
+    Node *temp = root;
     
-    solve(root, mini);
+    while(temp -> left != NULL)
+    {
+        temp = temp->left;
+    }
     
-    return mini;
+    return temp->data;
     
 }
