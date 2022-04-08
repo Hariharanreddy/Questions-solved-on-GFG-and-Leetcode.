@@ -77,7 +77,7 @@ class Solution
         //step2 : recursion will take care
         // if(forward != NULL)
         
-            head -> next = reverse(forward, k);
+        head -> next = reverse(forward, k);
         
         
         //return the head
