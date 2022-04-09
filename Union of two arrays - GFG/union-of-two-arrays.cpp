@@ -12,7 +12,7 @@ class Solution{
     //Function to return the count of number of elements in union of two arrays.
     int doUnion(int arr[], int n, int b[], int m)  {
         
-        map<int, bool> visited;
+        unordered_map<int, bool> visited;
         int count = 0;
         
         for(int i=0; i<n ;i++)
