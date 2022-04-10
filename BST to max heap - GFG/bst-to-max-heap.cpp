@@ -125,7 +125,6 @@ class Solution{
             return;
         }
         
-        
         preordertraverse(root -> left, vec, i);
         preordertraverse(root -> right, vec, i);
         root -> data = vec[i++];
@@ -138,10 +137,6 @@ class Solution{
         vector<int> vec;
         inordertraverse(root, vec);
         
-        // for(auto i : vec)
-        // {
-        //     cout<<i<<" ";
-        // }cout<<endl;
         
         int i = 0;
         
