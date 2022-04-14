@@ -9,10 +9,49 @@ using namespace std;
 
 class Solution{
 public:
-    vector<int> nextPermutation(int N, vector<int> arr){
+    vector<int> nextPermutation(int n, vector<int> arr){
         
-        next_permutation(arr.begin(), arr.end());
-        return arr;
+        
+        if(arr.size() == 1)
+        {
+            return arr;
+        }
+        
+        //Step1 - search for arr[i] < arr[i+1] from back
+        int index1;
+        for(int i=n-2 ; i>=0 ; i--)
+        {
+            if(arr[i] < arr[i+1])
+            {
+                index1 = i;
+                break;
+            }
+        }
+        
+        //Step2 - search for greater element than it from back
+        if(index1 < 0)
+        {
+            //last permutation was there so reverse the array
+            reverse(arr.begin(), arr.end());
+            return arr;
+        }
+        else
+        {
+            
+            for(int i = n-1 ; i>=0 ; i--)
+            {
+                if(arr[i] > arr[index1])
+                {
+                    int index2 = i;
+                    swap(arr[index2], arr[index1]);
+                    
+                    //reverse from further index
+                    reverse(arr.begin()+index1+1 , arr.end());
+                    return arr;
+                }
+            }
+        }
+    
     }
 };
 
