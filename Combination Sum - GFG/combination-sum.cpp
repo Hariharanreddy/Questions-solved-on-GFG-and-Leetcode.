@@ -42,8 +42,8 @@ public:
         A.erase(unique(A.begin(), A.end()), A.end());
         
         
-        int s = A.size();
-        func(0, B, A, ds, s, ans);
+        int size = A.size();
+        func(0, B, A, ds, size, ans);
         return ans;
     }
 };
