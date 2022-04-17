@@ -17,6 +17,11 @@ class Solution {
                 vector<vector<int>> &ans, int i, int size){
                     
         //base case
+        if(sum < 0)
+        {
+            return;
+        }
+        
         if(i == size)
         {
             if(sum == 0)
@@ -28,14 +33,11 @@ class Solution {
         
         //include 
         //dont change index
-        if(arr[i] <= sum)
-        {
         
             output.push_back(arr[i]);
             solve(arr, sum-arr[i], output, ans, i, size);
             output.pop_back();
         
-        }
         
         //exclude
         solve(arr, sum, output, ans, i+1, size);
@@ -47,7 +49,6 @@ class Solution {
         
         vector<vector<int>> ans;
         vector<int> output;
-        
         int index = 0;
         
         sort(A.begin(), A.end());
