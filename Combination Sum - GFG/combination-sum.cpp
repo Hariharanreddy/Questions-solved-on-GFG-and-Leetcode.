@@ -12,7 +12,7 @@ class Solution {
 public:
     void func(int ind, int B, vector<int>& A, vector<int>& ds,const int &n, vector<vector<int>>& ans) {
         
-        if(ind == A.size()) 
+        if(ind == n) 
         {
             if(B == 0) 
             {
@@ -39,10 +39,9 @@ public:
         
         vector<vector<int>> ans;
         vector<int> ds;
-        int size = A.size();
         
         A.erase(unique(A.begin(), A.end()), A.end());
-        func(0, B, A, ds, size, ans);
+        func(0, B, A, ds, A.size(), ans);
         return ans;
     }
 };
