@@ -6,50 +6,41 @@ using namespace std;
  // } Driver Code Ends
 class Solution
 {
-    public:
-    //Function to find all possible unique subsets.
-    
-    void findSubsets(vector<int> &arr, int n, int i, set<vector<int>> &tempAns, vector<int> &ds)
+        public:
+        //Function to find all possible unique subsets.
+        void findSubsets(vector<int> &arr, int ind, vector<int> &ds,
+                    vector<vector<int>> &ans)
         {
-            if(i >= n)
+            ans.push_back(ds);
+            
+            for(int i = ind ; i < arr.size() ; i++)
             {
-                tempAns.insert(ds);
-                return;
+                //for not creating duplicates
+                if(i != ind && arr[i] == arr[i-1])
+                {
+                    continue;
+                }
+    
+                ds.push_back(arr[i]);
+                findSubsets(arr, i+1, ds, ans);
+                ds.pop_back();
             }
             
-            //include
-            ds.push_back(arr[i]);
-            findSubsets(arr, n, i+1, tempAns, ds);
-            
-            //exclude
-            ds.pop_back();
-            findSubsets(arr, n, i+1, tempAns, ds);
-            
         }
     
     
     
-    vector<vector<int>> AllSubsets(vector<int> &arr, int n)
-    {
-        sort(arr.begin(), arr.end());
-        
-        int index = 0;
-        set<vector<int>> temp_ans;
-        vector<vector<int>> ans;
-        vector<int> ds;
-        
-        findSubsets(arr, n, index, temp_ans, ds);
-        
-        for(auto i : temp_ans)
+        vector<vector<int>> AllSubsets(vector<int> &arr, int n)
         {
-            ans.push_back(i);
+            sort(arr.begin(), arr.end());
+            vector<vector<int>> ans;
+            vector<int> ds;
+            
+            findSubsets(arr, 0, ds, ans);
+            
+            return ans;
+    
         }
-        // sort(ans.begin(), ans.end());
-        
-        
-        return ans;
-
-    }
 };
 
 // { Driver Code Starts.
