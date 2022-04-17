@@ -13,7 +13,7 @@ public:
     void func(int ind, int B, vector<int>& A, vector<int>& ds,
                 int size, vector<vector<int>>& ans) {
         
-        if(ind == size) 
+        if(ind >= size) 
         {
             if(B == 0) 
             {
