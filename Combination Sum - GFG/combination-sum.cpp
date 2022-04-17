@@ -12,14 +12,21 @@ class Solution {
 public:
     void func(int ind, int B, vector<int>& A, vector<int>& ds, vector<vector<int>>& ans) {
         if(ind == A.size()) {
-            if(B == 0) ans.push_back(ds);
+            
+            if(B == 0) 
+            {
+                ans.push_back(ds);
+            }
             return;
         }
         
         if(A[ind]<=B) {
+            
+            
             ds.push_back(A[ind]);
             func(ind, B-A[ind], A, ds, ans);
             ds.pop_back();
+            
         }
         
         func(ind+1, B, A, ds, ans);
@@ -27,6 +34,7 @@ public:
 public:
     vector<vector<int> > combinationSum(vector<int> &A, int B) {
         sort(A.begin(), A.end());
+        
         vector<vector<int>> ans;
         vector<int> ds;
         
