@@ -10,8 +10,10 @@ using namespace std;
 
 class Solution {
 public:
-    void func(int ind, int B, vector<int>& A, vector<int>& ds, vector<vector<int>>& ans) {
-        if(ind == A.size()) {
+    void func(int ind, int B, vector<int>& A, vector<int>& ds,int size, vector<vector<int>>& ans) {
+        
+        if(ind == A.size()) 
+        {
             
             if(B == 0) 
             {
@@ -24,12 +26,12 @@ public:
             
             
             ds.push_back(A[ind]);
-            func(ind, B-A[ind], A, ds, ans);
+            func(ind, B-A[ind], A, ds, size, ans);
             ds.pop_back();
             
         }
         
-        func(ind+1, B, A, ds, ans);
+        func(ind+1, B, A, ds, size, ans);
     }
 public:
     vector<vector<int> > combinationSum(vector<int> &A, int B) {
@@ -37,9 +39,10 @@ public:
         
         vector<vector<int>> ans;
         vector<int> ds;
+        int size = A.size();
         
         A.erase(unique(A.begin(), A.end()), A.end());
-        func(0, B, A, ds, ans);
+        func(0, B, A, ds, size, ans);
         return ans;
     }
 };
