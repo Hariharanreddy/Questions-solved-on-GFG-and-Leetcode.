@@ -11,9 +11,9 @@ using namespace std;
 class Solution {
 public:
     void func(int ind, int B, vector<int>& A, vector<int>& ds,
-                int n, vector<vector<int>>& ans) {
+                int size, vector<vector<int>>& ans) {
         
-        if(ind == n) 
+        if(ind == size) 
         {
             if(B == 0) 
             {
@@ -26,12 +26,12 @@ public:
             
             
             ds.push_back(A[ind]);
-            func(ind, B-A[ind], A, ds, n, ans);
+            func(ind, B-A[ind], A, ds, size, ans);
             ds.pop_back();
             
         }
         
-        func(ind+1, B, A, ds, n, ans);
+        func(ind+1, B, A, ds, size, ans);
     }
 public:
     vector<vector<int>> combinationSum(vector<int> &A, int B) {
