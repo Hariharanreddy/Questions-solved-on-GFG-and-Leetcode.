@@ -10,7 +10,8 @@ using namespace std;
 
 class Solution {
 public:
-    void func(int ind, int B, vector<int>& A, vector<int>& ds, int n, vector<vector<int>>& ans) {
+    void func(int ind, int B, vector<int>& A, vector<int>& ds,
+                int n, vector<vector<int>>& ans) {
         
         if(ind == n) 
         {
