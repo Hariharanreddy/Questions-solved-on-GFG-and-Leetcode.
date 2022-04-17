@@ -14,7 +14,7 @@ class Solution {
     //combinations whose sum is equal to given number.
     
     void solve(vector<int> &arr, int sum, vector<int> &output,
-                vector<vector<int>> &ans, int i, const int size){
+                vector<vector<int>> &ans, int i, int size){
                     
         //base case
         if(i == size)
