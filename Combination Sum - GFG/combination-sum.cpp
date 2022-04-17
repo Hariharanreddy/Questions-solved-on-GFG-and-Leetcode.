@@ -39,9 +39,11 @@ public:
         
         vector<vector<int>> ans;
         vector<int> ds;
-        
         A.erase(unique(A.begin(), A.end()), A.end());
-        func(0, B, A, ds, A.size(), ans);
+        
+        
+        const int s = A.size();
+        func(0, B, A, ds, s, ans);
         return ans;
     }
 };
