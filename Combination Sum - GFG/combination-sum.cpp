@@ -10,7 +10,7 @@ using namespace std;
 
 class Solution {
 public:
-    void func(int ind, int B, vector<int>& A, vector<int>& ds,int size, vector<vector<int>>& ans) {
+    void func(int ind, int B, vector<int>& A, vector<int>& ds,int &n, vector<vector<int>>& ans) {
         
         if(ind == A.size()) 
         {
@@ -26,15 +26,16 @@ public:
             
             
             ds.push_back(A[ind]);
-            func(ind, B-A[ind], A, ds, size, ans);
+            func(ind, B-A[ind], A, ds, n, ans);
             ds.pop_back();
             
         }
         
-        func(ind+1, B, A, ds, size, ans);
+        func(ind+1, B, A, ds, n, ans);
     }
 public:
-    vector<vector<int> > combinationSum(vector<int> &A, int B) {
+    vector<vector<int>> combinationSum(vector<int> &A, int B) {
+        
         sort(A.begin(), A.end());
         
         vector<vector<int>> ans;
