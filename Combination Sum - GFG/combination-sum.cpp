@@ -9,43 +9,54 @@ using namespace std;
 //User function template for C++
 
 class Solution {
-public:
-    void func(int ind, int B, vector<int>& A, vector<int>& ds,
-                int size, vector<vector<int>>& ans) {
-        
-        if(ind >= size) 
+  public:
+    //Function to return a list of indexes denoting the required 
+    //combinations whose sum is equal to given number.
+    
+    void solve(vector<int> &arr, int sum, vector<int> &output,
+                vector<vector<int>> &ans, int i, const int size){
+                    
+        //base case
+        if(i == size)
         {
-            if(B == 0) 
+            if(sum == 0)
             {
-                ans.push_back(ds);
+                ans.push_back(output);
             }
             return;
         }
         
-        if(A[ind]<=B) {
-            
-            
-            ds.push_back(A[ind]);
-            func(ind, B-A[ind], A, ds, size, ans);
-            ds.pop_back();
-            
+        //include 
+        //dont change index
+        if(arr[i] <= sum)
+        {
+        
+            output.push_back(arr[i]);
+            solve(arr, sum-arr[i], output, ans, i, size);
+            output.pop_back();
+        
         }
         
-        func(ind+1, B, A, ds, size, ans);
-    }
-public:
-    vector<vector<int>> combinationSum(vector<int> &A, int B) {
+        //exclude
+        solve(arr, sum, output, ans, i+1, size);
         
-        sort(A.begin(), A.end());
+    }
+    
+    
+    vector<vector<int>> combinationSum(vector<int> &A, int sum) {
         
         vector<vector<int>> ans;
-        vector<int> ds;
-        A.erase(unique(A.begin(), A.end()), A.end());
+        vector<int> output;
         
+        int index = 0;
         
-        int size = A.size();
-        func(0, B, A, ds, size, ans);
+        sort(A.begin(), A.end());
+        A.erase(unique( A.begin(), A.end()), A.end());
+        
+        solve(A, sum, output, ans, index, A.size());
+        
         return ans;
+        
     }
 };
 
