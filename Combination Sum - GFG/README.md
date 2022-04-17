@@ -1,5 +1,5 @@
 # Combination Sum
-##  Medium 
+## Medium 
 <div class="problem-statement">
                 <p></p><p><span style="font-size:18px">Given an array of integers and a sum B, find all unique combinations in the array where the sum is equal to B. The same number may be chosen from the array&nbsp;any number of times to make B.</span></p>
 
