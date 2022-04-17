@@ -26,9 +26,10 @@ public:
     }
 public:
     vector<vector<int> > combinationSum(vector<int> &A, int B) {
+        sort(A.begin(), A.end());
         vector<vector<int>> ans;
         vector<int> ds;
-        sort(A.begin(), A.end());
+        
         A.erase(unique(A.begin(), A.end()), A.end());
         func(0, B, A, ds, ans);
         return ans;
