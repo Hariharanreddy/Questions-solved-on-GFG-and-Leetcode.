@@ -42,7 +42,7 @@ public:
         A.erase(unique(A.begin(), A.end()), A.end());
         
         
-        const int s = A.size();
+        int s = A.size();
         func(0, B, A, ds, s, ans);
         return ans;
     }
