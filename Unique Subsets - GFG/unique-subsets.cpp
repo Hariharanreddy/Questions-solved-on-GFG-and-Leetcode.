@@ -9,21 +9,21 @@ class Solution
     public:
     //Function to find all possible unique subsets.
     
-    void findSubsets(vector<int> &arr, int n, int i, set<vector<int>> &ans, vector<int> &ds)
+    void findSubsets(vector<int> &arr, int n, int i, set<vector<int>> &tempAns, vector<int> &ds)
         {
             if(i >= n)
             {
-                ans.insert(ds);
+                tempAns.insert(ds);
                 return;
             }
             
             //include
             ds.push_back(arr[i]);
-            findSubsets(arr, n, i+1, ans, ds);
+            findSubsets(arr, n, i+1, tempAns, ds);
             
             //exclude
             ds.pop_back();
-            findSubsets(arr, n, i+1, ans, ds);
+            findSubsets(arr, n, i+1, tempAns, ds);
             
         }
     
@@ -44,7 +44,7 @@ class Solution
         {
             ans.push_back(i);
         }
-        sort(ans.begin(), ans.end());
+        // sort(ans.begin(), ans.end());
         
         
         return ans;
