@@ -19,6 +19,8 @@ class Solution
     {
         //In single loop - 3 things will be checked
         //row, col and the 3x3 box is having ch or not
+        
+        //since it is a 9x9 matrix
         for(int i=0 ; i<9 ; i++)
         {
             //row check
@@ -73,20 +75,23 @@ class Solution
                     return false;
                 }
             }
+            
+        //it means whole matrix has been traversed completely
+        //with all the elements
         return true;
     }
     
     //Function to print grids of the Sudoku.
     void printGrid (int grid[N][N]) 
     {
-        if(SolveSudoku(grid))
-        {
+        SolveSudoku(grid);
+        
             for(int i=0 ; i<N ; i++)
                 for(int j=0 ; j<N ; j++)
                 {
                     cout<<grid[i][j]<<" ";
                 }
-        }
+        
         
     }
 };
