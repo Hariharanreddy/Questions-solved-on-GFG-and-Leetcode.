@@ -22,7 +22,8 @@ public:
         
         for(int row = 0 ; row<n ; row++)
         {
-            if(leftRow[row] == 0 && upperDiagonal[row+col] == 0 && lowerDiagonal[n-1 + col - row] == 0)
+            if(leftRow[row] == 0 && upperDiagonal[row+col] == 0
+                && lowerDiagonal[n-1 + col - row] == 0)
             {
                 //mark that queen with the row
                 board[col] = row+1;
@@ -33,9 +34,6 @@ public:
                 lowerDiagonal[n-1 + col - row] = 1;
                 
                 solve(col+1, ans, board, leftRow, upperDiagonal, lowerDiagonal, n);
-                
-                //Unmark that queen
-                board[col] = 0;
                 
                 //map those 
                 leftRow[row] = 0;
