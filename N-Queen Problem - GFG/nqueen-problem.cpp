@@ -35,11 +35,10 @@ public:
                 
                 solve(col+1, ans, board, leftRow, upperDiagonal, lowerDiagonal, n);
                 
-                //map those 
+                //Unmap those 
                 leftRow[row] = 0;
                 upperDiagonal[row+col] = 0;
                 lowerDiagonal[n-1 + col - row] = 0;
-                
                 
             }
         }
