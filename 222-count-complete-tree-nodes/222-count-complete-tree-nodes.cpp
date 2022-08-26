@@ -23,14 +23,28 @@ int getLeftHeight(TreeNode* root) {
 }
 
 int countNodes(TreeNode* root) {
-    if(!root) return 0;
+     if(root == NULL)
+        return 0;
     
-    int left_height = getLeftHeight(root->left);
-    int right_height = getLeftHeight(root->right);
-    
-    if(left_height == right_height) 
-        return pow(2, left_height) + countNodes(root->right);
-        
-    return pow(2, right_height) + countNodes(root->left);
+        int res = 0;
+        queue<TreeNode *> q;
+        q.push(root);
+        while(!q.empty())
+        {
+
+            for(int i = 0; i < q.size(); ++ i)
+            {
+                 ++ res;
+                TreeNode *p = q.front();
+                q.pop();
+
+                if(p -> left != NULL)
+                    q.push(p -> left);
+                if(p -> right != NULL)
+                    q.push(p -> right);
+            }
+        }
+
+        return res;
 }
 };
