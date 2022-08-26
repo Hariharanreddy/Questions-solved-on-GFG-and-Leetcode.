@@ -11,25 +11,22 @@
  */
 class Solution {
 public:
-    void traverse(TreeNode *root, int &count){
-        if(root == NULL)
-        {
-            return;
-        }
+//     void traverse(TreeNode *root, int &count){
+//         if(root == NULL)
+//         {
+//             return;
+//         }
         
-        traverse(root->left, count);
-        count++;
-        traverse(root->right, count);
-    }
+//         traverse(root->left, count);
+//         count++;
+//         traverse(root->right, count);
+//     }
     
     
     int countNodes(TreeNode* root) {
-        
-        int count = 0;
-        
-        traverse(root, count);
-        
-        return count;
-        
+        if(root == NULL)return 0;
+        int left = countNodes(root->left);
+        int right = countNodes(root->right);
+        return left+right+1;
     }
 };
