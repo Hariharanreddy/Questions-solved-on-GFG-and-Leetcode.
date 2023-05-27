@@ -27,7 +27,7 @@ class Solution
     	    while((str[i]-'0' >= 0 && str[i]-'0' <= 9) && i>=0){
     
     	       
-    	       temp = temp + (int(str[i]-'0')) * pow(10, j);
+    	       temp = temp + (str[i]-'0') * pow(10, j);
 
     	        j++;
     	        i--;
