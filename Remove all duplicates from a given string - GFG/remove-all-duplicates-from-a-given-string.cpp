@@ -10,19 +10,18 @@ class Solution{
 public:
 	string removeDuplicates(string str) {
 	    
-	    unordered_map<char, int> mp;
-	    int size = str.length();
-	    string ans = "";
-	    
-	    for(int i=0 ; i < size ; i++){
-	        if(mp.find(str[i]) == mp.end()){
-	            mp[str[i]]++;
-	            ans.push_back(str[i]);
-	        }
-	        
-	    }
-	    
-	    return ans;
+	    unordered_set<char> s;
+        string ans;
+        
+        for(int i=0;i<str.length();i++){
+            
+            if(s.find(str[i]) == s.end())
+            {
+                ans+=str[i];
+                s.insert(str[i]);
+            }
+        }
+        return ans;
 	}
 };
 
